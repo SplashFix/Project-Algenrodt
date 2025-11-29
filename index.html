@@ -29,6 +29,7 @@
         radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
       background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px; 
       background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+      background-attachment: fixed; /* Für Parallax-Effekt */
       overflow-x: hidden;
       display: flex;
       justify-content: center;
@@ -902,6 +903,20 @@
     
 
         document.addEventListener('DOMContentLoaded', createEmojis);
+
+
+        // --- PARALLAX STERNENHIMMEL ---
+        function parallaxStars() {
+          const scrollY = window.scrollY;
+          // Originale Y-Positionen: 0, 60, 270, 100
+          // Wir passen die Y-Position basierend auf dem Scrollen an, mit unterschiedlichen Geschwindigkeiten für den Parallax-Effekt.
+          document.body.style.backgroundPosition = `0px ${-scrollY * 0.1}px, 40px ${60 - scrollY * 0.3}px, 130px ${270 - scrollY * 0.6}px, 70px ${100 - scrollY * 0.9}px`;
+        }
+
+        window.addEventListener('scroll', () => {
+          window.requestAnimationFrame(parallaxStars);
+        });
+        // --- ENDE PARALLAX ---
 
       </script>
 
